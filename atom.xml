@@ -4,7 +4,7 @@
   <title><![CDATA[Franklin Webber]]></title>
   <link href="https://burtlo.github.com/atom.xml" rel="self"/>
   <link href="https://burtlo.github.com/"/>
-  <updated>2012-05-29T23:55:52-07:00</updated>
+  <updated>2012-05-30T00:07:26-07:00</updated>
   <id>https://burtlo.github.com/</id>
   <author>
     <name><![CDATA[Franklin Webber]]></name>
@@ -12,6 +12,107 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Clapping For Apple]]></title>
+    <link href="https://burtlo.github.com/blog/2012/05/30/clapping-for-apple/"/>
+    <updated>2012-05-30T00:06:00-07:00</updated>
+    <id>https://burtlo.github.com/blog/2012/05/30/clapping-for-apple</id>
+    <content type="html"><![CDATA[<p>When I first started watching the Apple Developer videos, that are available
+through the iOS Dev Center, I was always amused by the participants at the talks
+clapping throughout various demonstrations. The presented feature would likely
+be saving the developers a new heap of time or give them a new tool for their
+belt. It&#8217;s become a bit of a joke over the last few weeks. A fellow developer
+will be dragging-and-dropping some code object into a storyboard or xib file and
+I will start clapping. Always amusing when it&#8217;s dropping a textfield.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Xcode's Project File Makes It Hard]]></title>
+    <link href="https://burtlo.github.com/blog/2012/05/30/xcodes-project-file-makes-it-hard/"/>
+    <updated>2012-05-30T00:05:00-07:00</updated>
+    <id>https://burtlo.github.com/blog/2012/05/30/xcodes-project-file-makes-it-hard</id>
+    <content type="html"><![CDATA[<p>iOS developers, as most other developers, give software away. A few months ago
+when I started down the path of iOS development I was saddened by the lack of
+community software in comparison to my experiences with Ruby. Namely I was
+saddened by the fact that there was no easy way to discover software libraries
+and tools. I was wrong. They have a community and there are definitely resources
+to assist with finding iOS software and components. However, it is still hard to
+integrate software into an existing application. By hard, I mean it&#8217;s a fairly
+manual process of downloading/cloning a repository and then manually importing
+files into the Xcode project file. Oh, the Xcode project file we will have to
+talk more.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Developers Make Terrible 'X']]></title>
+    <link href="https://burtlo.github.com/blog/2012/05/30/developers-make-terrible-x/"/>
+    <updated>2012-05-30T00:04:00-07:00</updated>
+    <id>https://burtlo.github.com/blog/2012/05/30/developers-make-terrible-x</id>
+    <content type="html"><![CDATA[<p>Developers make terrible testers &#8230; and designers and &#8230; likely anything other
+than a developer. In reality I think that most people that attempt to handle
+more than one concern at a given moment are generally bad at any of the
+supplimentary tasks.</p>
+
+<p>I am not trying to say that I am an exception to this rule, but I will say that
+when I attempt to test something or put a little design on top of it while I am
+still in the midst of delivering development aspects I will often times do
+terrible work. Just awful.</p>
+
+<p>The process I use to get this to work is to deliver on my development tasks.
+Take a break. Return to the work, rested and ready to test it or do some design
+for it. If it sounds familiar - it is! It is exactly the strategy that most
+every instructor has presented to you about writing and editing your own essays.</p>
+
+<p>Of course, there is no hope for you if finishing the work the night before. :)</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Getting More Out Of Our Documentation (By Putting More In It)]]></title>
+    <link href="https://burtlo.github.com/blog/2012/05/30/getting-more-out-of-our-documentation-by-putting-more-in-it/"/>
+    <updated>2012-05-30T00:03:00-07:00</updated>
+    <id>https://burtlo.github.com/blog/2012/05/30/getting-more-out-of-our-documentation-by-putting-more-in-it</id>
+    <content type="html"><![CDATA[<p>I came to Ruby by way of Cucumber. Cucumber placed an emphasis on writing tests
+that described the products behavior. Ideally Product Owners at the helm,
+authoring your requirements. No good tools were made available to provide
+documentation for the stakeholders. Out of necessity, I created an extension for
+YARD. I started to work on another extension for RSpec. I even started playing
+with integrating Bundler. Through this experimentation I realized how little our
+documentation tells us as stakeholders, testers, and developers.</p>
+
+<p>Tests are documentation; but they are not in our documentaiton.</p>
+
+<p>So I would like to help champion the continual war to encourage documentation by
+building tools that make better documentation from what has already been
+written. In that spirit I built an
+<a href="https://github.com/burtlo/yard-docco">extension</a> that generates better
+documentation with the comments made within methods themselves: annotated source
+code (docco style).</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Roles May Be The Death Of Me]]></title>
+    <link href="https://burtlo.github.com/blog/2012/05/30/roles-may-be-the-death-of-me/"/>
+    <updated>2012-05-30T00:02:00-07:00</updated>
+    <id>https://burtlo.github.com/blog/2012/05/30/roles-may-be-the-death-of-me</id>
+    <content type="html"><![CDATA[<p>Classification is useful; roles help define responsibilities. However, giving definition to something lends itself also to restriction. And this can be the unnecessary impedance or death of small systems.
+Within the small development team I work we have often confined ourselves to roles.</p>
+
+<p>Within the company our development efforts are geared towards a particular cause.</p>
+
+<p>When new concerns arise that fall outside the concerns of the individual role or the entire team it is not clear who or how they will be addressed&#8230; and often could be lost.</p>
+
+<p>Perhaps it is simply applying a system or a mindset in the military where your rank, in most cases, influences a level of pay and expertise. You are ultimately and at your core a soldier which can be applied to solve problems.</p>
+
+<p>It seems we encapsulate that at the current moment. I am a Software Developer 2.</p>
+
+<p>So maybe it is a cultural shift that the goals of the company ultimately outweigh the goals of the role.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Universal Frameworks for iOS made easy!]]></title>
