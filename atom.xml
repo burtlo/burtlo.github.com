@@ -1,16 +1,248 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[My Octopress Blog]]></title>
-  <link href="http://yoursite.com/atom.xml" rel="self"/>
-  <link href="http://yoursite.com/"/>
-  <updated>2012-05-29T23:48:58-07:00</updated>
-  <id>http://yoursite.com/</id>
+  <title><![CDATA[Franklin Webber]]></title>
+  <link href="https://burtlo.github.com/atom.xml" rel="self"/>
+  <link href="https://burtlo.github.com/"/>
+  <updated>2012-05-29T23:55:52-07:00</updated>
+  <id>https://burtlo.github.com/</id>
   <author>
-    <name><![CDATA[Your Name]]></name>
+    <name><![CDATA[Franklin Webber]]></name>
     
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Universal Frameworks for iOS made easy!]]></title>
+    <link href="https://burtlo.github.com/blog/2012/03/25/universal-frameworks-for-ios-made-easy/"/>
+    <updated>2012-03-25T15:58:00-07:00</updated>
+    <id>https://burtlo.github.com/blog/2012/03/25/universal-frameworks-for-ios-made-easy</id>
+    <content type="html"><![CDATA[<p>On a recent iOS project we wanted to integrate the
+<a href="https://github.com/facebook/facebook-ios-sdk">Facebook iOS SDK</a>. The
+integration went smoothy. We copied in the compiled library and the required
+headers and were able to focus on the login, authentication flow.</p>
+
+<h2>Problem</h2>
+
+<p>However, we later ran into trouble with the library working on the device but
+not in the simulator. We would fix it for the tests and the simulator but find
+out we had broken it again for the device. This back and forth continued until we had found out about Universal Frameworks.</p>
+
+<h2>Narrative</h2>
+
+<p>We needed to compile the library in a format that would work on both on the
+iPhone and the simulator. Google lead us to this <a href="http://db-in.com/blog/2011/07/universal-framework-iphone-ios-2-0/">invaluable post</a>
+that outlined the arduous path of creating a universal framework. A journey
+indeed filled with peril as there are so many opportunities along the way to
+take a misstep and lose your way.</p>
+
+<p>To the author&#8217;s credit, he does a good job of outlining the necessary steps to
+succeed. It is the shear overwhelming number of Xcode&#8217;s <a href="https://developer.apple.com/library/mac/#documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html">build settings</a>
+that can get in the way with crossing the finish line.</p>
+
+<p>As the project continued we came again to a similar crossroads as we needed to
+include Twitter authentication. We chose to use the
+<a href="https://github.com/thekarladam/MPOAuth">MPOAuth</a>
+library but again found the need to generate a universal framework to save us
+from the same particular annoyance (and others) that arose when it came time to
+integrate the library. We followed through the same treacherous steps.</p>
+
+<p>Having to do this twice has taught me that I do not want to do it again. There
+is simply too many steps to get right. It was something that needed to be easier
+and involve a lot less mouse-driven-development.</p>
+
+<h2>Solution</h2>
+
+<p><a href="https://github.com/rayh/xcoder">Xcoder</a> had the majority of the functionality to get started. However, it did
+not have the ability to create some core components like: Aggregate Targets,
+Copy Headers Build Phases, Run Script Build Phases.  At least it did not until
+this <a href="https://github.com/rayh/xcoder/pull/24">weekend</a>.</p>
+
+<p>I have created a <a href="https://gist.github.com/2201621">gist</a> that will generate a
+universal framework with sources and header files. This should successfully
+boil the the multiple page <a href="http://db-in.com/blog/2011/07/universal-framework-iphone-ios-2-0/">instructions</a> into roughly 100 lines of ruby code.</p>
+
+<p>Perhaps the most valuable part is the ability to set the multitude of required
+build settings, previously requiring deft configuration hunter skills, simply
+with the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">target</span><span class="o">.</span><span class="n">create_configurations</span> <span class="ss">:release</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">always_search_user_paths</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">architectures</span> <span class="o">=</span> <span class="o">[</span> <span class="s2">&quot;$(ARCHS_STANDARD_32_BIT)&quot;</span><span class="p">,</span> <span class="s1">&#39;armv6&#39;</span> <span class="o">]</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">copy_phase_strip</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">dead_code_stripping</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">debug_information_format</span> <span class="o">=</span> <span class="s2">&quot;dwarf-with-dsym&quot;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">c_language_standard</span> <span class="o">=</span> <span class="s1">&#39;gnu99&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">enable_objc_exceptions</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">generate_debugging_symbols</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">precompile_prefix_headers</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">gcc_version</span> <span class="o">=</span> <span class="s1">&#39;com.apple.compilers.llvm.clang.1_0&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">warn_64_to_32_bit_conversion</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">warn_about_missing_prototypes</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">install_path</span> <span class="o">=</span> <span class="s2">&quot;$(LOCAL_LIBRARY_DIR)/Bundles&quot;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">link_with_standard_libraries</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">mach_o_type</span> <span class="o">=</span> <span class="s1">&#39;mh_object&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">macosx_deployment_target</span> <span class="o">=</span> <span class="s1">&#39;10.7&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">product_name</span> <span class="o">=</span> <span class="s1">&#39;$(TARGET_NAME)&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">sdkroot</span> <span class="o">=</span> <span class="s1">&#39;iphoneos&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">valid_architectures</span> <span class="o">=</span> <span class="s1">&#39;$(ARCHS_STANDARD_32_BIT)&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">wrapper_extension</span> <span class="o">=</span> <span class="s1">&#39;framework&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">info_plist_location</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">prefix_header</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">save!</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Building iOS Apps in the Shell]]></title>
+    <link href="https://burtlo.github.com/blog/2012/02/29/building-ios-app-in-the-shell/"/>
+    <updated>2012-02-29T11:53:00-08:00</updated>
+    <id>https://burtlo.github.com/blog/2012/02/29/building-ios-app-in-the-shell</id>
+    <content type="html"><![CDATA[<p>The current state of iOS command-line tools for iOS is abysmal especially if you
+are familiar and comfortable with a particular feedback loop for building,
+testing, and deploying. It is code savagery! Plain and simple!</p>
+
+<h2>Problem</h2>
+
+<p>I wanted the ability to easily build Xcode targets from bash.</p>
+
+<h2>Narrative</h2>
+
+<p>As an iOS developer, if you use any testing library requiring an additional,
+independent target you find yourself within Xcode re-selecting targets and
+platforms during development to validate functionality. Xcode&#8217;s programming is
+predominately Mouse-Driven Development (MDD) and great for initial discovery but
+that begins to break down as you start to identify multi-target operations you
+want to perform quickly. This operation of switching targets/platforms is a
+small cost if you write a lot of test or application code up front. This fails
+when you want to test drive your development as this small operational cost adds
+up as you begin to refine your feedback loop.</p>
+
+<p>A project Substantial inherited came with a rudimentary <code>Rakefile</code> with a number
+of tasks and helper methods defined to assist with building and testing an iOS
+application from the command-line. It was awesome! As long as I did not block
+the IOS simulator I could write code and tests and get more immediate feedback.</p>
+
+<p>Sadly, it was largely wrong: composed of a number of variables and hard-coded
+values that were based on assumptions of how the project was built. We hit our
+first major problem upgrading all the developers from Xcode 3.x to Xcode 4.x.
+All of our command-line tools and files broke and that quick feedback loop we
+became accustomed to broke down. Because of it our team and others delivered
+functionality that broke several tests that we later, out of context, struggled
+to resolve.</p>
+
+<p>With the start of our next project I immediately ported over the
+<a href="https://gist.github.com/1953158">Rakefile</a> and took the opportunity to clean it
+up. In a small amount of time I created some code that I was reasonably happy
+with but again worried about having to drag a gist of code from project to
+project. I thought about future me and I wanted to ensure I did not have to
+remember any of this every again unless I absolutely needed.</p>
+
+<h2>Solution</h2>
+
+<p>It was then I went on the search for software to save me. It was then that I
+stumbled upon <a href="http://rayh.com.au/">Rayh</a>&#8217;s
+<a href="https://github.com/rayh/xcoder">xcoder</a>. I was able to throw away 200+ lines of
+Rakefile to more elegantly write the following:</p>
+
+<figure class='code'><figcaption><span>Rakefile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;xcoder&#39;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">task</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="ss">:specs</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">task</span> <span class="ss">:specs</span> <span class="k">do</span>
+</span><span class='line'>  <span class="no">Xcode</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="s1">&#39;TestProject&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">target</span><span class="p">(</span><span class="s1">&#39;Specs&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s1">&#39;Debug&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">build</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Gorgeous! And more importantly exceedingly more portable when I want to get
+started on the right foot. To make this ever more portable I recently added
+default rake tasks to the <a href="https://github.com/rayh/xcoder">xcoder</a> gem that adds
+all your Xcode projects in your default directory available through rake.</p>
+
+<figure class='code'><figcaption><span>Rakefile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;xcoder/rake_task&#39;</span>
+</span><span class='line'><span class="no">Xcode</span><span class="o">::</span><span class="no">RakeTask</span><span class="o">.</span><span class="n">new</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which will generate several common tasks for each of your projects > targets >
+configurations</p>
+
+<figure class='code'><figcaption><span>rake output</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake xcode:test_project:specs:debug:build                   <span class="c"># Build TestProject Specs Debug</span>
+</span><span class='line'>rake xcode:test_project:specs:debug:clean                   <span class="c"># Clean TestProject Specs Debug</span>
+</span><span class='line'>rake xcode:test_project:specs:debug:package                 <span class="c"># Package TestProject Specs Debug</span>
+</span><span class='line'>rake xcode:test_project:specs:debug:test                    <span class="c"># Test TestProject Specs Debug</span>
+</span><span class='line'>rake xcode:test_project:specs:release:build                 <span class="c"># Build TestProject Specs Release</span>
+</span><span class='line'>rake xcode:test_project:specs:release:clean                 <span class="c"># Clean TestProject Specs Release</span>
+</span><span class='line'>rake xcode:test_project:specs:release:package               <span class="c"># Package TestProject Specs Release</span>
+</span><span class='line'>rake xcode:test_project:specs:release:test                  <span class="c"># Test TestProject Specs Release</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now the <code>Rakefile</code> looks something like:</p>
+
+<figure class='code'><figcaption><span>Rakefile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;xcoder/rake_task&#39;</span>
+</span><span class='line'><span class="no">Xcode</span><span class="o">::</span><span class="no">RakeTask</span><span class="o">.</span><span class="n">new</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">task</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="s2">&quot;xcode:text_project:specs:debug:build&quot;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The benefit is that <a href="(https://github.com/rayh/xcoder">Xcoder</a> is leveraging the
+project file to generate the correct <code>xcodebuild</code> operation allowing your build
+to remain in lock-step with the Xcode environment as you build and test your
+product in a headless environment.</p>
+]]></content>
+  </entry>
   
 </feed>

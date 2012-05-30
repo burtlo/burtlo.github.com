@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: bash | Franklin Webber]]></title>
+  <link href="https://burtlo.github.com/blog/categories/bash/atom.xml" rel="self"/>
+  <link href="https://burtlo.github.com/"/>
+  <updated>2012-05-29T23:55:52-07:00</updated>
+  <id>https://burtlo.github.com/</id>
+  <author>
+    <name><![CDATA[Franklin Webber]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Building iOS Apps in the Shell]]></title>
+    <link href="https://burtlo.github.com/blog/2012/02/29/building-ios-app-in-the-shell/"/>
+    <updated>2012-02-29T11:53:00-08:00</updated>
+    <id>https://burtlo.github.com/blog/2012/02/29/building-ios-app-in-the-shell</id>
+    <content type="html"><![CDATA[<p>The current state of iOS command-line tools for iOS is abysmal especially if you
+are familiar and comfortable with a particular feedback loop for building,
+testing, and deploying. It is code savagery! Plain and simple!</p>
+
+<h2>Problem</h2>
+
+<p>I wanted the ability to easily build Xcode targets from bash.</p>
+
+<h2>Narrative</h2>
+
+<p>As an iOS developer, if you use any testing library requiring an additional,
+independent target you find yourself within Xcode re-selecting targets and
+platforms during development to validate functionality. Xcode's programming is
+predominately Mouse-Driven Development (MDD) and great for initial discovery but
+that begins to break down as you start to identify multi-target operations you
+want to perform quickly. This operation of switching targets/platforms is a
+small cost if you write a lot of test or application code up front. This fails
+when you want to test drive your development as this small operational cost adds
+up as you begin to refine your feedback loop.</p>
+
+<p>A project Substantial inherited came with a rudimentary <code>Rakefile</code> with a number
+of tasks and helper methods defined to assist with building and testing an iOS
+application from the command-line. It was awesome! As long as I did not block
+the IOS simulator I could write code and tests and get more immediate feedback.</p>
+
+<p>Sadly, it was largely wrong: composed of a number of variables and hard-coded
+values that were based on assumptions of how the project was built. We hit our
+first major problem upgrading all the developers from Xcode 3.x to Xcode 4.x.
+All of our command-line tools and files broke and that quick feedback loop we
+became accustomed to broke down. Because of it our team and others delivered
+functionality that broke several tests that we later, out of context, struggled
+to resolve.</p>
+
+<p>With the start of our next project I immediately ported over the
+<a href="https://gist.github.com/1953158">Rakefile</a> and took the opportunity to clean it
+up. In a small amount of time I created some code that I was reasonably happy
+with but again worried about having to drag a gist of code from project to
+project. I thought about future me and I wanted to ensure I did not have to
+remember any of this every again unless I absolutely needed.</p>
+
+<h2>Solution</h2>
+
+<p>It was then I went on the search for software to save me. It was then that I
+stumbled upon <a href="http://rayh.com.au/">Rayh</a>'s
+<a href="https://github.com/rayh/xcoder">xcoder</a>. I was able to throw away 200+ lines of
+Rakefile to more elegantly write the following:</p>
+
+<p>``` ruby Rakefile
+require 'xcoder'</p>
+
+<p>task :default => :specs</p>
+
+<p>task :specs do
+  Xcode.project('TestProject').target('Specs').config('Debug').builder.build
+end
+```</p>
+
+<p>Gorgeous! And more importantly exceedingly more portable when I want to get
+started on the right foot. To make this ever more portable I recently added
+default rake tasks to the <a href="https://github.com/rayh/xcoder">xcoder</a> gem that adds
+all your Xcode projects in your default directory available through rake.</p>
+
+<p><code>ruby Rakefile
+require 'xcoder/rake_task'
+Xcode::RakeTask.new
+</code></p>
+
+<p>Which will generate several common tasks for each of your projects > targets >
+configurations</p>
+
+<p><code>bash rake output
+rake xcode:test_project:specs:debug:build                   # Build TestProject Specs Debug
+rake xcode:test_project:specs:debug:clean                   # Clean TestProject Specs Debug
+rake xcode:test_project:specs:debug:package                 # Package TestProject Specs Debug
+rake xcode:test_project:specs:debug:test                    # Test TestProject Specs Debug
+rake xcode:test_project:specs:release:build                 # Build TestProject Specs Release
+rake xcode:test_project:specs:release:clean                 # Clean TestProject Specs Release
+rake xcode:test_project:specs:release:package               # Package TestProject Specs Release
+rake xcode:test_project:specs:release:test                  # Test TestProject Specs Release
+</code></p>
+
+<p>Now the <code>Rakefile</code> looks something like:</p>
+
+<p>``` ruby Rakefile
+require 'xcoder/rake_task'
+Xcode::RakeTask.new</p>
+
+<p>task :default => "xcode:text_project:specs:debug:build"
+```</p>
+
+<p>The benefit is that <a href="(https://github.com/rayh/xcoder">Xcoder</a> is leveraging the
+project file to generate the correct <code>xcodebuild</code> operation allowing your build
+to remain in lock-step with the Xcode environment as you build and test your
+product in a headless environment.</p>
+]]></content>
+  </entry>
+  
+</feed>

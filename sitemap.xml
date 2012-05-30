@@ -1,11 +1,21 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
-        <loc>http://yoursite.com/blog/archives/</loc>
+        <loc>https://burtlo.github.com/blog/2012/02/29/building-ios-app-in-the-shell/</loc>
         <lastmod>2012-05-29T23:48:26-07:00</lastmod>
     </url>
     <url>
-        <loc>http://yoursite.com/</loc>
+        <loc>
+            https://burtlo.github.com/blog/2012/03/25/universal-frameworks-for-ios-made-easy/
+        </loc>
+        <lastmod>2012-05-29T23:48:26-07:00</lastmod>
+    </url>
+    <url>
+        <loc>https://burtlo.github.com/blog/archives/</loc>
+        <lastmod>2012-05-29T23:48:26-07:00</lastmod>
+    </url>
+    <url>
+        <loc>https://burtlo.github.com/</loc>
         <lastmod>2012-05-29T23:48:26-07:00</lastmod>
     </url>
 </urlset>
