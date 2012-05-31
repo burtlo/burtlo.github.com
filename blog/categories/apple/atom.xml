@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Apple | Franklin Webber]]></title>
+  <link href="https://burtlo.github.com/blog/categories/apple/atom.xml" rel="self"/>
+  <link href="https://burtlo.github.com/"/>
+  <updated>2012-05-31T00:33:19-07:00</updated>
+  <id>https://burtlo.github.com/</id>
+  <author>
+    <name><![CDATA[Franklin Webber]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Clapping For Apple]]></title>
+    <link href="https://burtlo.github.com/blog/2012/05/30/clapping-for-apple/"/>
+    <updated>2012-05-30T00:06:00-07:00</updated>
+    <id>https://burtlo.github.com/blog/2012/05/30/clapping-for-apple</id>
+    <content type="html"><![CDATA[<p>When I first started watching the Apple Developer videos, that are available
+through the iOS Dev Center, I was always amused by the participants at the talks
+clapping throughout various demonstrations. The presented feature would likely
+be saving the developers a new heap of time or give them a new tool for their
+belt. It's become a bit of a joke over the last few weeks. A fellow developer
+will be dragging-and-dropping some code object into a storyboard or xib file and
+I will start clapping. Always amusing when it's dropping a textfield.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: bash | Franklin Webber]]></title>
-  <link href="https://burtlo.github.com/blog/categories/bash/atom.xml" rel="self"/>
+  <title><![CDATA[Category: bash, | Franklin Webber]]></title>
+  <link href="https://burtlo.github.com/blog/categories/bash-/atom.xml" rel="self"/>
   <link href="https://burtlo.github.com/"/>
-  <updated>2012-05-31T00:30:18-07:00</updated>
+  <updated>2012-05-31T00:33:19-07:00</updated>
   <id>https://burtlo.github.com/</id>
   <author>
     <name><![CDATA[Franklin Webber]]></name>

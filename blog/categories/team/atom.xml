@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: team | Franklin Webber]]></title>
+  <link href="https://burtlo.github.com/blog/categories/team/atom.xml" rel="self"/>
+  <link href="https://burtlo.github.com/"/>
+  <updated>2012-05-31T00:33:19-07:00</updated>
+  <id>https://burtlo.github.com/</id>
+  <author>
+    <name><![CDATA[Franklin Webber]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Roles May Be The Death Of Me]]></title>
+    <link href="https://burtlo.github.com/blog/2012/05/30/roles-may-be-the-death-of-me/"/>
+    <updated>2012-05-30T00:02:00-07:00</updated>
+    <id>https://burtlo.github.com/blog/2012/05/30/roles-may-be-the-death-of-me</id>
+    <content type="html"><![CDATA[<p>Classification is useful; roles help define responsibilities. However, giving definition to something lends itself also to restriction. And this can be the unnecessary impedance or death of small systems.
+Within the small development team I work we have often confined ourselves to roles.</p>
+
+<p>Within the company our development efforts are geared towards a particular cause.</p>
+
+<p>When new concerns arise that fall outside the concerns of the individual role or the entire team it is not clear who or how they will be addressed... and often could be lost.</p>
+
+<p>Perhaps it is simply applying a system or a mindset in the military where your rank, in most cases, influences a level of pay and expertise. You are ultimately and at your core a soldier which can be applied to solve problems.</p>
+
+<p>It seems we encapsulate that at the current moment. I am a Software Developer 2.</p>
+
+<p>So maybe it is a cultural shift that the goals of the company ultimately outweigh the goals of the role.</p>
+]]></content>
+  </entry>
+  
+</feed>

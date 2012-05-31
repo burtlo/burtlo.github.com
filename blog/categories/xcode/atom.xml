@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: iOS, | Franklin Webber]]></title>
-  <link href="https://burtlo.github.com/blog/categories/ios-/atom.xml" rel="self"/>
+  <title><![CDATA[Category: xcode | Franklin Webber]]></title>
+  <link href="https://burtlo.github.com/blog/categories/xcode/atom.xml" rel="self"/>
   <link href="https://burtlo.github.com/"/>
   <updated>2012-05-31T00:33:19-07:00</updated>
   <id>https://burtlo.github.com/</id>
@@ -14,17 +14,20 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Clapping For Apple]]></title>
-    <link href="https://burtlo.github.com/blog/2012/05/30/clapping-for-apple/"/>
-    <updated>2012-05-30T00:06:00-07:00</updated>
-    <id>https://burtlo.github.com/blog/2012/05/30/clapping-for-apple</id>
-    <content type="html"><![CDATA[<p>When I first started watching the Apple Developer videos, that are available
-through the iOS Dev Center, I was always amused by the participants at the talks
-clapping throughout various demonstrations. The presented feature would likely
-be saving the developers a new heap of time or give them a new tool for their
-belt. It's become a bit of a joke over the last few weeks. A fellow developer
-will be dragging-and-dropping some code object into a storyboard or xib file and
-I will start clapping. Always amusing when it's dropping a textfield.</p>
+    <title type="html"><![CDATA[Xcode's Project File Makes It Hard]]></title>
+    <link href="https://burtlo.github.com/blog/2012/05/30/xcodes-project-file-makes-it-hard/"/>
+    <updated>2012-05-30T00:05:00-07:00</updated>
+    <id>https://burtlo.github.com/blog/2012/05/30/xcodes-project-file-makes-it-hard</id>
+    <content type="html"><![CDATA[<p>iOS developers, as most other developers, give software away. A few months ago
+when I started down the path of iOS development I was saddened by the lack of
+community software in comparison to my experiences with Ruby. Namely I was
+saddened by the fact that there was no easy way to discover software libraries
+and tools. I was wrong. They have a community and there are definitely resources
+to assist with finding iOS software and components. However, it is still hard to
+integrate software into an existing application. By hard, I mean it's a fairly
+manual process of downloading/cloning a repository and then manually importing
+files into the Xcode project file. Oh, the Xcode project file we will have to
+talk more.</p>
 ]]></content>
   </entry>
   

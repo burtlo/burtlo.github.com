@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: testing, | Franklin Webber]]></title>
+  <link href="https://burtlo.github.com/blog/categories/testing-/atom.xml" rel="self"/>
+  <link href="https://burtlo.github.com/"/>
+  <updated>2012-05-31T00:33:19-07:00</updated>
+  <id>https://burtlo.github.com/</id>
+  <author>
+    <name><![CDATA[Franklin Webber]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[TDD Is Not For New Developers]]></title>
+    <link href="https://burtlo.github.com/blog/2012/05/30/tdd-is-not-for-new-developers/"/>
+    <updated>2012-05-30T20:04:00-07:00</updated>
+    <id>https://burtlo.github.com/blog/2012/05/30/tdd-is-not-for-new-developers</id>
+    <content type="html"><![CDATA[<p>I recently had the opportunity to instruct several new developers in the nuances
+of the Ruby language.</p>
+
+<p>There is a strong emphasis now for developers to test drive their development.
+Several of the exercises utilized tests as a safety net. Other exercises did
+have them write code to make tests pass.</p>
+
+<p>Despite what I would call a solid upbringing the students do not immediately
+reach for their test framework when they start working on new exercises. It
+just does not feel comfortable trying to write tests when you barely have an
+understanding of the complexity of the problem and the scope of the language.</p>
+
+<p>To those of us polyglots, now working in our third or fourth language we find
+it a far easier venture. I think we should think twice before we require,
+enforce, or guilt new developers writing software to bring with them tests in
+tow.</p>
+
+<p>Test Driven Development requires a much greater level of mastery and
+understanding than we often give credit.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Getting More Out Of Our Documentation (By Putting More In It)]]></title>
+    <link href="https://burtlo.github.com/blog/2012/05/30/getting-more-out-of-our-documentation-by-putting-more-in-it/"/>
+    <updated>2012-05-30T00:03:00-07:00</updated>
+    <id>https://burtlo.github.com/blog/2012/05/30/getting-more-out-of-our-documentation-by-putting-more-in-it</id>
+    <content type="html"><![CDATA[<p>I came to Ruby by way of Cucumber. Cucumber placed an emphasis on writing tests
+that described the products behavior. Ideally Product Owners at the helm,
+authoring your requirements. No good tools were made available to provide
+documentation for the stakeholders. Out of necessity, I created an extension for
+YARD. I started to work on another extension for RSpec. I even started playing
+with integrating Bundler. Through this experimentation I realized how little our
+documentation tells us as stakeholders, testers, and developers.</p>
+
+<p>Tests are documentation; but they are not in our documentaiton.</p>
+
+<p>So I would like to help champion the continual war to encourage documentation by
+building tools that make better documentation from what has already been
+written. In that spirit I built an
+<a href="https://github.com/burtlo/yard-docco">extension</a> that generates better
+documentation with the comments made within methods themselves: annotated source
+code (docco style).</p>
+]]></content>
+  </entry>
+  
+</feed>
