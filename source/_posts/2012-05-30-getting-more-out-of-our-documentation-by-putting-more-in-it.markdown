@@ -3,7 +3,7 @@ layout: post
 title: "Getting More Out Of Our Documentation (By Putting More In It)"
 date: 2012-05-30 00:03
 comments: true
-categories: 
+categories: testing, documentation
 ---
 
 I came to Ruby by way of Cucumber. Cucumber placed an emphasis on writing tests

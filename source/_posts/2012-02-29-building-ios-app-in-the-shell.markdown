@@ -3,7 +3,7 @@ layout: post
 title: "Building iOS Apps in the Shell"
 date: 2012-02-29 11:53
 comments: true
-categories: iOS, ruby, bash
+categories: iOS, ruby, bash, xcode
 author: Franklin Webber
 ---
 

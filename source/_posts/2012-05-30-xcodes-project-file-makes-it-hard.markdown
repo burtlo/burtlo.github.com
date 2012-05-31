@@ -3,7 +3,7 @@ layout: post
 title: "Xcode's Project File Makes It Hard"
 date: 2012-05-30 00:05
 comments: true
-categories: 
+categories: xcode
 ---
 
 iOS developers, as most other developers, give software away. A few months ago

@@ -3,13 +3,13 @@ layout: post
 title: "Developers Make Terrible 'X'"
 date: 2012-05-30 00:04
 comments: true
-categories: 
+categories: developers
 ---
 
 Developers make terrible testers ... and designers and ... likely anything other
 than a developer. In reality I think that most people that attempt to handle
 more than one concern at a given moment are generally bad at any of the
-supplimentary tasks.
+supplementary tasks.
 
 I am not trying to say that I am an exception to this rule, but I will say that
 when I attempt to test something or put a little design on top of it while I am

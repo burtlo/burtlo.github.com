@@ -3,7 +3,7 @@ layout: post
 title: "Clapping For Apple"
 date: 2012-05-30 00:06
 comments: true
-categories: 
+categories: iOS, Apple
 ---
 
 When I first started watching the Apple Developer videos, that are available

@@ -3,7 +3,7 @@ layout: post
 title: "Roles May Be The Death Of Me"
 date: 2012-05-30 00:02
 comments: true
-categories: 
+categories: team dynamics
 ---
 
 Classification is useful; roles help define responsibilities. However, giving definition to something lends itself also to restriction. And this can be the unnecessary impedance or death of small systems.

@@ -3,7 +3,7 @@ layout: post
 title: "Universal Frameworks for iOS made easy!"
 date: 2012-03-25 15:58
 comments: true
-categories: iOS, ruby
+categories: iOS, ruby, xcode
 author: Franklin Webber
 ---
 
