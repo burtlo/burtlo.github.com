@@ -4,7 +4,7 @@
   <title><![CDATA[Franklin Webber]]></title>
   <link href="https://burtlo.github.com/atom.xml" rel="self"/>
   <link href="https://burtlo.github.com/"/>
-  <updated>2012-05-30T00:07:26-07:00</updated>
+  <updated>2012-05-31T00:30:18-07:00</updated>
   <id>https://burtlo.github.com/</id>
   <author>
     <name><![CDATA[Franklin Webber]]></name>
@@ -12,6 +12,33 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[TDD Is Not For New Developers]]></title>
+    <link href="https://burtlo.github.com/blog/2012/05/30/tdd-is-not-for-new-developers/"/>
+    <updated>2012-05-30T20:04:00-07:00</updated>
+    <id>https://burtlo.github.com/blog/2012/05/30/tdd-is-not-for-new-developers</id>
+    <content type="html"><![CDATA[<p>I recently had the opportunity to instruct several new developers in the nuances
+of the Ruby language.</p>
+
+<p>There is a strong emphasis now for developers to test drive their development.
+Several of the exercises utilized tests as a safety net. Other exercises did
+have them write code to make tests pass.</p>
+
+<p>Despite what I would call a solid upbringing the students do not immediately
+reach for their test framework when they start working on new exercises. It
+just does not feel comfortable trying to write tests when you barely have an
+understanding of the complexity of the problem and the scope of the language.</p>
+
+<p>To those of us polyglots, now working in our third or fourth language we find
+it a far easier venture. I think we should think twice before we require,
+enforce, or guilt new developers writing software to bring with them tests in
+tow.</p>
+
+<p>Test Driven Development requires a much greater level of mastery and
+understanding that we often give credit.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Clapping For Apple]]></title>
