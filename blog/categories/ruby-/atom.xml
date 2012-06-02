@@ -4,7 +4,7 @@
   <title><![CDATA[Category: ruby, | Franklin Webber]]></title>
   <link href="https://burtlo.github.com/blog/categories/ruby-/atom.xml" rel="self"/>
   <link href="https://burtlo.github.com/"/>
-  <updated>2012-05-31T00:33:19-07:00</updated>
+  <updated>2012-06-01T17:02:37-07:00</updated>
   <id>https://burtlo.github.com/</id>
   <author>
     <name><![CDATA[Franklin Webber]]></name>
@@ -12,6 +12,87 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[IRB Is Not For Beginners]]></title>
+    <link href="https://burtlo.github.com/blog/2012/06/01/irb-is-not-for-beginners/"/>
+    <updated>2012-06-01T16:13:00-07:00</updated>
+    <id>https://burtlo.github.com/blog/2012/06/01/irb-is-not-for-beginners</id>
+    <content type="html"><![CDATA[<p>Several introductory tutorials use IRB as a tool to show off Ruby to new
+developers. I can understand the allure of using IRB:</p>
+
+<ul>
+<li>does not require the user to create a file</li>
+<li>immediate feedback for their actions</li>
+</ul>
+
+
+<p>In my experience, using IRB is fraught with far too much peril to make it a
+valuable learning tool.</p>
+
+<ul>
+<li>unable to visualize all the code that they have written</li>
+<li>navigation in IRB is much harder than in an editor</li>
+<li>state of the code is lost when exiting IRB</li>
+</ul>
+
+
+<h3>does not require the user to create a file</h3>
+
+<p>It is a major boon that the user does not have to create a file to get started.
+However, it becomes a major pain if the example starts to span multiple lines
+or requires particular step-by-step code to be completed.</p>
+
+<p>Given that a user will want to learn by re-typing all the code they see in an
+example, they are likely to make a mistake during the data entry process and
+because of the poor, console like, interaction provided to the user they will
+often be unable to use any of the code that follows the mistake.</p>
+
+<p>From a troubleshooting point of view, it is extremely difficult to have the user
+move back through their command history (Up-Arrow) multiple times to find the
+issue.</p>
+
+<p>Eventually your examples will have to exist in a file and while it seems like
+a headache from the start to have the user create a file for them to copy the
+example or write their code in, it is simply where they are going to end up.</p>
+
+<ul>
+<li>Examples longer than a single line should be written in a file (not IRB).</li>
+</ul>
+
+
+<h3>immediate feedback for their actions</h3>
+
+<p>I do rather enjoy this feature of IRB over using a text file. When a user
+finishes a line and presses the <em>enter</em> key, they are immediately treated with
+feedback to the code that they wrote. It's like chatting with <em>Rainman</em>; able
+to repeat what you tell it and solve complex math problems quickly.</p>
+
+<p>It is great when it works. It is a great failure when it does not work.</p>
+
+<p>The great failure I am talking about is the first time in an example you ask
+a new developer to perform any operation that has an opening element and a
+closing element.</p>
+
+<p><code>
+001 &gt; puts "Hello World'
+002"&gt; _
+</code></p>
+
+<p>Instead of getting immediate feedback, the user is treated with what appears to
+them as a broken console. They are not even able to exit! Everything they start
+type in at this point stops working as it once did. All because they opened a
+string with a <code>"</code> and closed it with a <code>'</code>.</p>
+
+<p>This only gets worse when they start to use more of these required starting
+and ending elements in Arrays, Hashes, Methods, and Blocks.</p>
+
+<ul>
+<li>Limit your IRB examples that use starting-ending elements</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Universal Frameworks for iOS made easy!]]></title>
