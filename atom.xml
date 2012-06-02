@@ -4,7 +4,7 @@
   <title><![CDATA[Franklin Webber]]></title>
   <link href="https://burtlo.github.com/atom.xml" rel="self"/>
   <link href="https://burtlo.github.com/"/>
-  <updated>2012-06-01T17:02:37-07:00</updated>
+  <updated>2012-06-01T17:03:57-07:00</updated>
   <id>https://burtlo.github.com/</id>
   <author>
     <name><![CDATA[Franklin Webber]]></name>
@@ -21,23 +21,23 @@
     <content type="html"><![CDATA[<p>Several introductory tutorials use IRB as a tool to show off Ruby to new
 developers. I can understand the allure of using IRB:</p>
 
-<ul>
-<li>does not require the user to create a file</li>
-<li>immediate feedback for their actions</li>
+<blockquote><ul>
+<li><p>does not require the user to create a file</p></li>
+<li><p>immediate feedback for their actions</p></li>
 </ul>
-
+</blockquote>
 
 <p>In my experience, using IRB is fraught with far too much peril to make it a
 valuable learning tool.</p>
 
-<ul>
-<li>unable to visualize all the code that they have written</li>
-<li>navigation in IRB is much harder than in an editor</li>
-<li>state of the code is lost when exiting IRB</li>
+<blockquote><ul>
+<li><p>unable to visualize all the code that they have written</p></li>
+<li><p>navigation in IRB is much harder than in an editor</p></li>
+<li><p>state of the code is lost when exiting IRB</p></li>
 </ul>
+</blockquote>
 
-
-<h3>does not require the user to create a file</h3>
+<h2>does not require the user to create a file</h2>
 
 <p>It is a major boon that the user does not have to create a file to get started.
 However, it becomes a major pain if the example starts to span multiple lines
@@ -56,12 +56,9 @@ issue.</p>
 a headache from the start to have the user create a file for them to copy the
 example or write their code in, it is simply where they are going to end up.</p>
 
-<ul>
-<li>Examples longer than a single line should be written in a file (not IRB).</li>
-</ul>
+<blockquote><p>Examples longer than a single line should be written in a file (not IRB).</p></blockquote>
 
-
-<h3>immediate feedback for their actions</h3>
+<h2>immediate feedback for their actions</h2>
 
 <p>I do rather enjoy this feature of IRB over using a text file. When a user
 finishes a line and presses the <em>enter</em> key, they are immediately treated with
@@ -88,10 +85,7 @@ string with a <code>"</code> and closed it with a <code>'</code>.</p>
 <p>This only gets worse when they start to use more of these required starting
 and ending elements in Arrays, Hashes, Methods, and Blocks.</p>
 
-<ul>
-<li>Limit your IRB examples that use starting-ending elements</li>
-</ul>
-
+<blockquote><p>Limit your IRB examples that use starting-ending elements</p></blockquote>
 ]]></content>
   </entry>
   
