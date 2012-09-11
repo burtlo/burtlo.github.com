@@ -4,7 +4,7 @@
   <title><![CDATA[Franklin Webber]]></title>
   <link href="https://burtlo.github.com/atom.xml" rel="self"/>
   <link href="https://burtlo.github.com/"/>
-  <updated>2012-06-01T17:03:57-07:00</updated>
+  <updated>2012-09-11T09:51:21-04:00</updated>
   <id>https://burtlo.github.com/</id>
   <author>
     <name><![CDATA[Franklin Webber]]></name>
@@ -14,9 +14,118 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Pull Requests from Terminal]]></title>
+    <link href="https://burtlo.github.com/blog/2012/09/11/pull-requests-from-terminal/"/>
+    <updated>2012-09-11T09:30:00-04:00</updated>
+    <id>https://burtlo.github.com/blog/2012/09/11/pull-requests-from-terminal</id>
+    <content type="html"><![CDATA[<p>Several companies are using Github as a source repository solution. Many teams have adopted a great workflow that involves opening a pull request when a feature is complete. Using Github to code review a new feature or fix is awesome . Anything that promotes more communication and review of ones code is awesome.</p>
+
+<p>The process goes something like this:</p>
+
+<ul>
+<li>Start a new feature branch</li>
+<li>Implement feature within the branch</li>
+<li>Push the branch to Github</li>
+<li>View completed branch within Github</li>
+<li>Open pull request for new branch</li>
+</ul>
+
+
+<p>Reviewing the steps I noted the primary tools used to accomplish them:</p>
+
+<ul>
+<li>(terminal,git)    - Start a new feature branch</li>
+<li>(terminal,editor) - Implement feature within the branch</li>
+<li>(terminal,git)    - Push the branch to Github</li>
+<li>(browser)         - View completed branch within Github</li>
+<li>(browser)         - Open pull request for new branch</li>
+</ul>
+
+
+<p>What stood out to me was how the final stages of this process stood out. It was then that I sought to remedy that.</p>
+
+<p>With the help of the <a href="http://defunkt.io/hub/">hub</a> and a little bash I created a single command to allow me to perform a pull request from the command-line.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">function </span>pull-request <span class="o">{</span>
+</span><span class='line'>  hub pull-request -h <span class="k">$(</span>__github_remote_origin<span class="k">)</span>:<span class="k">$(</span>__github_current_branch<span class="k">)</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function </span>__github_current_branch <span class="o">{</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;$1`git branch --no-color 2&gt; /dev/null | sed -e &#39;/^[^*]/d&#39; -e &#39;s/* \(.*\)/\1/&#39;`&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function </span>__github_remote_origin <span class="o">{</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;$1`git remote -v | grep &quot;</span><span class="o">(</span>push<span class="o">)</span><span class="s2">&quot; | sed &quot;</span>s#origin.*:<span class="se">\(</span><span class="o">[</span>^/<span class="o">]</span>*<span class="se">\)</span>.*push.*#<span class="se">\1</span><span class="c">#&quot;`&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hub&#8217;s <code>pull-request</code> command by itself was great when I was working within my own projects but failed to generate the correct pull request targets when I was working on a project that belonged to an organization.</p>
+
+<p>This small change allows me to combine the last two steps of the workflow into a single step as well as bring it more in-line with the other tools in the entire process.</p>
+
+<h3>Installation</h3>
+
+<p>Install <a href="http://defunkt.io/hub/">hub</a> from brew.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install hub
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Open your <code>.bash_profile</code> or <code>.bashrc</code> and add the following lines:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">function </span>pull-request <span class="o">{</span>
+</span><span class='line'>  hub pull-request -h <span class="k">$(</span>__github_remote_origin<span class="k">)</span>:<span class="k">$(</span>__github_current_branch<span class="k">)</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function </span>__github_current_branch <span class="o">{</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;$1`git branch --no-color 2&gt; /dev/null | sed -e &#39;/^[^*]/d&#39; -e &#39;s/* \(.*\)/\1/&#39;`&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function </span>__github_remote_origin <span class="o">{</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;$1`git remote -v | grep &quot;</span><span class="o">(</span>push<span class="o">)</span><span class="s2">&quot; | sed &quot;</span>s#origin.*:<span class="se">\(</span><span class="o">[</span>^/<span class="o">]</span>*<span class="se">\)</span>.*push.*#<span class="se">\1</span><span class="c">#&quot;`&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Save and exit. Run the source command to use your updated bash commands.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">source</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Running the pull-request command should launch your GIT_EDITOR or EDITOR to compose the pull request message.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[IRB Is Not For Beginners]]></title>
     <link href="https://burtlo.github.com/blog/2012/06/01/irb-is-not-for-beginners/"/>
-    <updated>2012-06-01T16:13:00-07:00</updated>
+    <updated>2012-06-01T16:13:00-04:00</updated>
     <id>https://burtlo.github.com/blog/2012/06/01/irb-is-not-for-beginners</id>
     <content type="html"><![CDATA[<p>Several introductory tutorials use IRB as a tool to show off Ruby to new
 developers. I can understand the allure of using IRB:</p>
@@ -92,7 +201,7 @@ and ending elements in Arrays, Hashes, Methods, and Blocks.</p>
   <entry>
     <title type="html"><![CDATA[TDD Is Not For New Developers]]></title>
     <link href="https://burtlo.github.com/blog/2012/05/30/tdd-is-not-for-new-developers/"/>
-    <updated>2012-05-30T20:04:00-07:00</updated>
+    <updated>2012-05-30T20:04:00-04:00</updated>
     <id>https://burtlo.github.com/blog/2012/05/30/tdd-is-not-for-new-developers</id>
     <content type="html"><![CDATA[<p>I recently had the opportunity to instruct several new developers in the nuances
 of the Ruby language.</p>
@@ -119,7 +228,7 @@ understanding than we often give credit.</p>
   <entry>
     <title type="html"><![CDATA[Clapping For Apple]]></title>
     <link href="https://burtlo.github.com/blog/2012/05/30/clapping-for-apple/"/>
-    <updated>2012-05-30T00:06:00-07:00</updated>
+    <updated>2012-05-30T00:06:00-04:00</updated>
     <id>https://burtlo.github.com/blog/2012/05/30/clapping-for-apple</id>
     <content type="html"><![CDATA[<p>When I first started watching the Apple Developer videos, that are available
 through the iOS Dev Center, I was always amused by the participants at the talks
@@ -134,7 +243,7 @@ I will start clapping. Always amusing when it&#8217;s dropping a textfield.</p>
   <entry>
     <title type="html"><![CDATA[Xcode's Project File Makes It Hard]]></title>
     <link href="https://burtlo.github.com/blog/2012/05/30/xcodes-project-file-makes-it-hard/"/>
-    <updated>2012-05-30T00:05:00-07:00</updated>
+    <updated>2012-05-30T00:05:00-04:00</updated>
     <id>https://burtlo.github.com/blog/2012/05/30/xcodes-project-file-makes-it-hard</id>
     <content type="html"><![CDATA[<p>iOS developers, as most other developers, give software away. A few months ago
 when I started down the path of iOS development I was saddened by the lack of
@@ -152,7 +261,7 @@ talk more.</p>
   <entry>
     <title type="html"><![CDATA[Developers Make Terrible 'X']]></title>
     <link href="https://burtlo.github.com/blog/2012/05/30/developers-make-terrible-x/"/>
-    <updated>2012-05-30T00:04:00-07:00</updated>
+    <updated>2012-05-30T00:04:00-04:00</updated>
     <id>https://burtlo.github.com/blog/2012/05/30/developers-make-terrible-x</id>
     <content type="html"><![CDATA[<p>Developers make terrible testers &#8230; and designers and &#8230; likely anything other
 than a developer. In reality I think that most people that attempt to handle
@@ -176,7 +285,7 @@ every instructor has presented to you about writing and editing your own essays.
   <entry>
     <title type="html"><![CDATA[Getting More Out Of Our Documentation (By Putting More In It)]]></title>
     <link href="https://burtlo.github.com/blog/2012/05/30/getting-more-out-of-our-documentation-by-putting-more-in-it/"/>
-    <updated>2012-05-30T00:03:00-07:00</updated>
+    <updated>2012-05-30T00:03:00-04:00</updated>
     <id>https://burtlo.github.com/blog/2012/05/30/getting-more-out-of-our-documentation-by-putting-more-in-it</id>
     <content type="html"><![CDATA[<p>I came to Ruby by way of Cucumber. Cucumber placed an emphasis on writing tests
 that described the products behavior. Ideally Product Owners at the helm,
@@ -200,7 +309,7 @@ code (docco style).</p>
   <entry>
     <title type="html"><![CDATA[Roles May Be The Death Of Me]]></title>
     <link href="https://burtlo.github.com/blog/2012/05/30/roles-may-be-the-death-of-me/"/>
-    <updated>2012-05-30T00:02:00-07:00</updated>
+    <updated>2012-05-30T00:02:00-04:00</updated>
     <id>https://burtlo.github.com/blog/2012/05/30/roles-may-be-the-death-of-me</id>
     <content type="html"><![CDATA[<p>Classification is useful; roles help define responsibilities. However, giving definition to something lends itself also to restriction. And this can be the unnecessary impedance or death of small systems.
 Within the small development team I work we have often confined ourselves to roles.</p>
@@ -220,7 +329,7 @@ Within the small development team I work we have often confined ourselves to rol
   <entry>
     <title type="html"><![CDATA[Universal Frameworks for iOS made easy!]]></title>
     <link href="https://burtlo.github.com/blog/2012/03/25/universal-frameworks-for-ios-made-easy/"/>
-    <updated>2012-03-25T15:58:00-07:00</updated>
+    <updated>2012-03-25T15:58:00-04:00</updated>
     <id>https://burtlo.github.com/blog/2012/03/25/universal-frameworks-for-ios-made-easy</id>
     <content type="html"><![CDATA[<p>On a recent iOS project we wanted to integrate the
 <a href="https://github.com/facebook/facebook-ios-sdk">Facebook iOS SDK</a>. The
@@ -329,7 +438,7 @@ with the following:</p>
   <entry>
     <title type="html"><![CDATA[Building iOS Apps in the Shell]]></title>
     <link href="https://burtlo.github.com/blog/2012/02/29/building-ios-app-in-the-shell/"/>
-    <updated>2012-02-29T11:53:00-08:00</updated>
+    <updated>2012-02-29T11:53:00-05:00</updated>
     <id>https://burtlo.github.com/blog/2012/02/29/building-ios-app-in-the-shell</id>
     <content type="html"><![CDATA[<p>The current state of iOS command-line tools for iOS is abysmal especially if you
 are familiar and comfortable with a particular feedback loop for building,

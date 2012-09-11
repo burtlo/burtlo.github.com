@@ -4,7 +4,7 @@
   <title><![CDATA[Category: testing, | Franklin Webber]]></title>
   <link href="https://burtlo.github.com/blog/categories/testing-/atom.xml" rel="self"/>
   <link href="https://burtlo.github.com/"/>
-  <updated>2012-06-01T17:03:57-07:00</updated>
+  <updated>2012-09-11T09:51:21-04:00</updated>
   <id>https://burtlo.github.com/</id>
   <author>
     <name><![CDATA[Franklin Webber]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[TDD Is Not For New Developers]]></title>
     <link href="https://burtlo.github.com/blog/2012/05/30/tdd-is-not-for-new-developers/"/>
-    <updated>2012-05-30T20:04:00-07:00</updated>
+    <updated>2012-05-30T20:04:00-04:00</updated>
     <id>https://burtlo.github.com/blog/2012/05/30/tdd-is-not-for-new-developers</id>
     <content type="html"><![CDATA[<p>I recently had the opportunity to instruct several new developers in the nuances
 of the Ruby language.</p>
@@ -43,7 +43,7 @@ understanding than we often give credit.</p>
   <entry>
     <title type="html"><![CDATA[Getting More Out Of Our Documentation (By Putting More In It)]]></title>
     <link href="https://burtlo.github.com/blog/2012/05/30/getting-more-out-of-our-documentation-by-putting-more-in-it/"/>
-    <updated>2012-05-30T00:03:00-07:00</updated>
+    <updated>2012-05-30T00:03:00-04:00</updated>
     <id>https://burtlo.github.com/blog/2012/05/30/getting-more-out-of-our-documentation-by-putting-more-in-it</id>
     <content type="html"><![CDATA[<p>I came to Ruby by way of Cucumber. Cucumber placed an emphasis on writing tests
 that described the products behavior. Ideally Product Owners at the helm,

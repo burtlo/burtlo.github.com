@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Pull Requests from Terminal - Franklin Webber</title>
+  <meta name="author" content="Franklin Webber">
+
+  
+  <meta name="description" content="Several companies are using Github as a source repository solution. Many teams have adopted a great workflow that involves opening a pull request &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="https://burtlo.github.com/blog/2012/09/11/pull-requests-from-terminal">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="/atom.xml" rel="alternate" title="Franklin Webber" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">Franklin Webber</a></h1>
+  
+    <h2>General cutup and roustabout</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:burtlo.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archives</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Pull Requests From Terminal</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-11T09:30:00-04:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Several companies are using Github as a source repository solution. Many teams have adopted a great workflow that involves opening a pull request when a feature is complete. Using Github to code review a new feature or fix is awesome . Anything that promotes more communication and review of ones code is awesome.</p>
+
+<p>The process goes something like this:</p>
+
+<ul>
+<li>Start a new feature branch</li>
+<li>Implement feature within the branch</li>
+<li>Push the branch to Github</li>
+<li>View completed branch within Github</li>
+<li>Open pull request for new branch</li>
+</ul>
+
+
+<p>Reviewing the steps I noted the primary tools used to accomplish them:</p>
+
+<ul>
+<li>(terminal,git)    - Start a new feature branch</li>
+<li>(terminal,editor) - Implement feature within the branch</li>
+<li>(terminal,git)    - Push the branch to Github</li>
+<li>(browser)         - View completed branch within Github</li>
+<li>(browser)         - Open pull request for new branch</li>
+</ul>
+
+
+<p>What stood out to me was how the final stages of this process stood out. It was then that I sought to remedy that.</p>
+
+<p>With the help of the <a href="http://defunkt.io/hub/">hub</a> and a little bash I created a single command to allow me to perform a pull request from the command-line.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">function </span>pull-request <span class="o">{</span>
+</span><span class='line'>  hub pull-request -h <span class="k">$(</span>__github_remote_origin<span class="k">)</span>:<span class="k">$(</span>__github_current_branch<span class="k">)</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function </span>__github_current_branch <span class="o">{</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;$1`git branch --no-color 2&gt; /dev/null | sed -e &#39;/^[^*]/d&#39; -e &#39;s/* \(.*\)/\1/&#39;`&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function </span>__github_remote_origin <span class="o">{</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;$1`git remote -v | grep &quot;</span><span class="o">(</span>push<span class="o">)</span><span class="s2">&quot; | sed &quot;</span>s#origin.*:<span class="se">\(</span><span class="o">[</span>^/<span class="o">]</span>*<span class="se">\)</span>.*push.*#<span class="se">\1</span><span class="c">#&quot;`&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Hub&#8217;s <code>pull-request</code> command by itself was great when I was working within my own projects but failed to generate the correct pull request targets when I was working on a project that belonged to an organization.</p>
+
+<p>This small change allows me to combine the last two steps of the workflow into a single step as well as bring it more in-line with the other tools in the entire process.</p>
+
+<h3>Installation</h3>
+
+<p>Install <a href="http://defunkt.io/hub/">hub</a> from brew.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'>brew install hub
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Open your <code>.bash_profile</code> or <code>.bashrc</code> and add the following lines:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="k">function </span>pull-request <span class="o">{</span>
+</span><span class='line'>  hub pull-request -h <span class="k">$(</span>__github_remote_origin<span class="k">)</span>:<span class="k">$(</span>__github_current_branch<span class="k">)</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function </span>__github_current_branch <span class="o">{</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;$1`git branch --no-color 2&gt; /dev/null | sed -e &#39;/^[^*]/d&#39; -e &#39;s/* \(.*\)/\1/&#39;`&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function </span>__github_remote_origin <span class="o">{</span>
+</span><span class='line'>  <span class="nb">echo</span> <span class="s2">&quot;$1`git remote -v | grep &quot;</span><span class="o">(</span>push<span class="o">)</span><span class="s2">&quot; | sed &quot;</span>s#origin.*:<span class="se">\(</span><span class="o">[</span>^/<span class="o">]</span>*<span class="se">\)</span>.*push.*#<span class="se">\1</span><span class="c">#&quot;`&quot;</span>
+</span><span class='line'><span class="o">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Save and exit. Run the source command to use your updated bash commands.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='bash'><span class='line'><span class="nb">source</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Running the pull-request command should launch your GIT_EDITOR or EDITOR to compose the pull request message.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Franklin Webber</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-11T09:30:00-04:00" pubdate data-updated="true">Sep 11<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="https://burtlo.github.com/blog/2012/09/11/pull-requests-from-terminal/" data-via="franklinwebber" data-counturl="https://burtlo.github.com/blog/2012/09/11/pull-requests-from-terminal/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/06/01/irb-is-not-for-beginners/" title="Previous Post: IRB Is Not For Beginners">&laquo; IRB Is Not For Beginners</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Recent Posts</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/09/11/pull-requests-from-terminal/">Pull Requests from Terminal</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/06/01/irb-is-not-for-beginners/">IRB Is Not For Beginners</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/30/tdd-is-not-for-new-developers/">TDD Is Not For New Developers</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/30/clapping-for-apple/">Clapping For Apple</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/05/30/xcodes-project-file-makes-it-hard/">Xcode's Project File Makes It Hard</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Status updating...</li>
+  </ul>
+  
+  <a href="https://github.com/burtlo">@burtlo</a> on GitHub
+  
+  <script type="text/javascript">
+    $.domReady(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'burtlo',
+            count: 0,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+<section>
+  <h1>Latest Tweets</h1>
+  <ul id="tweets">
+    <li class="loading">Status updating...</li>
+  </ul>
+  <script type="text/javascript">
+    $.domReady(function(){
+      getTwitterFeed("franklinwebber", 4, false);
+    });
+  </script>
+  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
+  
+    <a href="http://twitter.com/franklinwebber" class="twitter-follow-button" data-show-count="false">Follow @franklinwebber</a>
+  
+</section>
+
+
+
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Franklin Webber -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>

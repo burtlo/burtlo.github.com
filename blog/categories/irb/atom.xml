@@ -4,7 +4,7 @@
   <title><![CDATA[Category: IRB | Franklin Webber]]></title>
   <link href="https://burtlo.github.com/blog/categories/irb/atom.xml" rel="self"/>
   <link href="https://burtlo.github.com/"/>
-  <updated>2012-06-01T17:03:57-07:00</updated>
+  <updated>2012-09-11T09:51:21-04:00</updated>
   <id>https://burtlo.github.com/</id>
   <author>
     <name><![CDATA[Franklin Webber]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[IRB Is Not For Beginners]]></title>
     <link href="https://burtlo.github.com/blog/2012/06/01/irb-is-not-for-beginners/"/>
-    <updated>2012-06-01T16:13:00-07:00</updated>
+    <updated>2012-06-01T16:13:00-04:00</updated>
     <id>https://burtlo.github.com/blog/2012/06/01/irb-is-not-for-beginners</id>
     <content type="html"><![CDATA[<p>Several introductory tutorials use IRB as a tool to show off Ruby to new
 developers. I can understand the allure of using IRB:</p>
