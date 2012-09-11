@@ -9,17 +9,20 @@ categories: ruby, teaching, IRB
 Several introductory tutorials use IRB as a tool to show off Ruby to new
 developers. I can understand the allure of using IRB:
 
-* does not require the user to create a file
-* immediate feedback for their actions
+> * does not require the user to create a file
+> 
+> * immediate feedback for their actions
 
 In my experience, using IRB is fraught with far too much peril to make it a
 valuable learning tool.
 
-* unable to visualize all the code that they have written
-* navigation in IRB is much harder than in an editor
-* state of the code is lost when exiting IRB
+> * unable to visualize all the code that they have written
+> 
+> * navigation in IRB is much harder than in an editor
+>
+> * state of the code is lost when exiting IRB
 
-### does not require the user to create a file
+## does not require the user to create a file
 
 It is a major boon that the user does not have to create a file to get started.
 However, it becomes a major pain if the example starts to span multiple lines
@@ -38,9 +41,9 @@ Eventually your examples will have to exist in a file and while it seems like
 a headache from the start to have the user create a file for them to copy the
 example or write their code in, it is simply where they are going to end up.
 
-* Examples longer than a single line should be written in a file (not IRB).
+> Examples longer than a single line should be written in a file (not IRB).
 
-### immediate feedback for their actions
+## immediate feedback for their actions
 
 I do rather enjoy this feature of IRB over using a text file. When a user
 finishes a line and presses the *enter* key, they are immediately treated with
@@ -66,4 +69,4 @@ string with a `"` and closed it with a `'`.
 This only gets worse when they start to use more of these required starting
 and ending elements in Arrays, Hashes, Methods, and Blocks.
 
-* Limit your IRB examples that use starting-ending elements
+> Limit your IRB examples that use starting-ending elements
