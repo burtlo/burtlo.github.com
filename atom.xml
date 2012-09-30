@@ -4,7 +4,7 @@
   <title><![CDATA[Franklin Webber]]></title>
   <link href="https://burtlo.github.com/atom.xml" rel="self"/>
   <link href="https://burtlo.github.com/"/>
-  <updated>2012-09-24T13:30:44-04:00</updated>
+  <updated>2012-09-29T21:54:43-04:00</updated>
   <id>https://burtlo.github.com/</id>
   <author>
     <name><![CDATA[Franklin Webber]]></name>
@@ -12,6 +12,54 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Dipping a toe into TMUX]]></title>
+    <link href="https://burtlo.github.com/blog/2012/09/29/dipping-a-toe-into-tmux/"/>
+    <updated>2012-09-29T21:45:00-04:00</updated>
+    <id>https://burtlo.github.com/blog/2012/09/29/dipping-a-toe-into-tmux</id>
+    <content type="html"><![CDATA[<p>I started to scroll through <a href="http://pragprog.com/book/bhtmux/tmux">tmux: productive mouse-free development</a>. I thought I would give it a try to help me better manage remote systems by using it locally. And for the most part it has been a pretty awesome tool that yields some results pretty quickly for my investment. So far the only tedious part is the lack of ability to easily scroll back through the history. I can do it, but it is by far not as easy it was simply using Terminal.</p>
+
+<p>Of course, after starting to read the book and starting working with the first few commands I started to hate using <strong>Ctrl+B</strong> as the prefix key. I immediately stopped reading and started to search for an easier way. What follows is how I mapped my <strong>CAPS LOCK</strong> key as <strong>Ctrl+B</strong>.</p>
+
+<h3>Disabling CAPS LOCK</h3>
+
+<p>If you haven&#8217;t already done so, gain an extra key and open up your <em>System Preferences > Keyboard > Modifier Keys &#8230;</em> and rebind CAPSLOCK to <strong>No Action</strong>.</p>
+
+<h3>Rebinding CAPSLOCK to CONTROL_R (Right Control Key)</h3>
+
+<ul>
+<li>Install <a href="http://pqrs.org/macosx/keyremap4macbook/pckeyboardhack.html.en">PCKeyboardHack</a></li>
+<li>Open <em>System Preferences > PCKeyboardHack</em></li>
+<li>Change &#8220;Caps Lock&#8221; to keycode <code>62</code>.</li>
+</ul>
+
+
+<p><img src="https://img.skitch.com/20120926-m3r8ttqnwu4j5bny7dx81tgp9d.jpg" alt="Reassigning the Caps Lock" /></p>
+
+<h3>Rebinding CONTROL_R (Right Control Key) to CONTROL + B</h3>
+
+<ul>
+<li><p>Install <a href="http://pqrs.org/macosx/keyremap4macbook/index.html.en">KeyRemap4MacBook</a></p></li>
+<li><p>Open <em>System Preferences > KeyRemap4MackBook > Misc &amp; Uninstall</em></p></li>
+<li>Click &#8220;Open private.xml&#8221;</li>
+</ul>
+
+
+<p><img src="https://img.skitch.com/20120926-f31sf7jfsfhunggg7qh9fbrpud.jpg" alt="Opening private.xml" /></p>
+
+<ul>
+<li>Copy and Paste the private.xml provided with in this gist.</li>
+<li>Open <em>System Preferences > KeyRemap4MackBook > Change Key</em></li>
+<li>Click &#8220;ReloadXML&#8221;</li>
+<li>Toggle open &#8220;TMUX Key Remappings&#8221;</li>
+<li>Check &#8220;TMUX: Right Control to Control+B</li>
+</ul>
+
+
+<p><img src="https://img.skitch.com/20120926-mp93sudigdsjseuqtfwp7q68w9.jpg" alt="Enabling Keybinding" /></p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Pull Requests from Terminal]]></title>

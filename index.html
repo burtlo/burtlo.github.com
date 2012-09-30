@@ -9,7 +9,7 @@
   <meta name="author" content="Franklin Webber">
 
   
-  <meta name="description" content="Several companies are using Github as a source repository solution. Many teams have adopted a great workflow that involves opening a pull request &hellip;">
+  <meta name="description" content="I started to scroll through tmux: productive mouse-free development. I thought I would give it a try to help me better manage remote systems by using &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -64,6 +64,81 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/09/29/dipping-a-toe-into-tmux/">Dipping a Toe Into TMUX</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-29T21:45:00-04:00" pubdate data-updated="true">Sep 29<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>I started to scroll through <a href="http://pragprog.com/book/bhtmux/tmux">tmux: productive mouse-free development</a>. I thought I would give it a try to help me better manage remote systems by using it locally. And for the most part it has been a pretty awesome tool that yields some results pretty quickly for my investment. So far the only tedious part is the lack of ability to easily scroll back through the history. I can do it, but it is by far not as easy it was simply using Terminal.</p>
+
+<p>Of course, after starting to read the book and starting working with the first few commands I started to hate using <strong>Ctrl+B</strong> as the prefix key. I immediately stopped reading and started to search for an easier way. What follows is how I mapped my <strong>CAPS LOCK</strong> key as <strong>Ctrl+B</strong>.</p>
+
+<h3>Disabling CAPS LOCK</h3>
+
+<p>If you haven&#8217;t already done so, gain an extra key and open up your <em>System Preferences > Keyboard > Modifier Keys &#8230;</em> and rebind CAPSLOCK to <strong>No Action</strong>.</p>
+
+<h3>Rebinding CAPSLOCK to CONTROL_R (Right Control Key)</h3>
+
+<ul>
+<li>Install <a href="http://pqrs.org/macosx/keyremap4macbook/pckeyboardhack.html.en">PCKeyboardHack</a></li>
+<li>Open <em>System Preferences > PCKeyboardHack</em></li>
+<li>Change &#8220;Caps Lock&#8221; to keycode <code>62</code>.</li>
+</ul>
+
+
+<p><img src="https://img.skitch.com/20120926-m3r8ttqnwu4j5bny7dx81tgp9d.jpg" alt="Reassigning the Caps Lock" /></p>
+
+<h3>Rebinding CONTROL_R (Right Control Key) to CONTROL + B</h3>
+
+<ul>
+<li><p>Install <a href="http://pqrs.org/macosx/keyremap4macbook/index.html.en">KeyRemap4MacBook</a></p></li>
+<li><p>Open <em>System Preferences > KeyRemap4MackBook > Misc &amp; Uninstall</em></p></li>
+<li>Click &#8220;Open private.xml&#8221;</li>
+</ul>
+
+
+<p><img src="https://img.skitch.com/20120926-f31sf7jfsfhunggg7qh9fbrpud.jpg" alt="Opening private.xml" /></p>
+
+<ul>
+<li>Copy and Paste the private.xml provided with in this gist.</li>
+<li>Open <em>System Preferences > KeyRemap4MackBook > Change Key</em></li>
+<li>Click &#8220;ReloadXML&#8221;</li>
+<li>Toggle open &#8220;TMUX Key Remappings&#8221;</li>
+<li>Check &#8220;TMUX: Right Control to Control+B</li>
+</ul>
+
+
+<p><img src="https://img.skitch.com/20120926-mp93sudigdsjseuqtfwp7q68w9.jpg" alt="Enabling Keybinding" /></p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -730,157 +805,9 @@ with the following:</p>
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/02/29/building-ios-app-in-the-shell/">Building iOS Apps in the Shell</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-02-29T11:53:00-05:00" pubdate data-updated="true">Feb 29<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>The current state of iOS command-line tools for iOS is abysmal especially if you
-are familiar and comfortable with a particular feedback loop for building,
-testing, and deploying. It is code savagery! Plain and simple!</p>
-
-<h2>Problem</h2>
-
-<p>I wanted the ability to easily build Xcode targets from bash.</p>
-
-<h2>Narrative</h2>
-
-<p>As an iOS developer, if you use any testing library requiring an additional,
-independent target you find yourself within Xcode re-selecting targets and
-platforms during development to validate functionality. Xcode&#8217;s programming is
-predominately Mouse-Driven Development (MDD) and great for initial discovery but
-that begins to break down as you start to identify multi-target operations you
-want to perform quickly. This operation of switching targets/platforms is a
-small cost if you write a lot of test or application code up front. This fails
-when you want to test drive your development as this small operational cost adds
-up as you begin to refine your feedback loop.</p>
-
-<p>A project Substantial inherited came with a rudimentary <code>Rakefile</code> with a number
-of tasks and helper methods defined to assist with building and testing an iOS
-application from the command-line. It was awesome! As long as I did not block
-the IOS simulator I could write code and tests and get more immediate feedback.</p>
-
-<p>Sadly, it was largely wrong: composed of a number of variables and hard-coded
-values that were based on assumptions of how the project was built. We hit our
-first major problem upgrading all the developers from Xcode 3.x to Xcode 4.x.
-All of our command-line tools and files broke and that quick feedback loop we
-became accustomed to broke down. Because of it our team and others delivered
-functionality that broke several tests that we later, out of context, struggled
-to resolve.</p>
-
-<p>With the start of our next project I immediately ported over the
-<a href="https://gist.github.com/1953158">Rakefile</a> and took the opportunity to clean it
-up. In a small amount of time I created some code that I was reasonably happy
-with but again worried about having to drag a gist of code from project to
-project. I thought about future me and I wanted to ensure I did not have to
-remember any of this every again unless I absolutely needed.</p>
-
-<h2>Solution</h2>
-
-<p>It was then I went on the search for software to save me. It was then that I
-stumbled upon <a href="http://rayh.com.au/">Rayh</a>&#8217;s
-<a href="https://github.com/rayh/xcoder">xcoder</a>. I was able to throw away 200+ lines of
-Rakefile to more elegantly write the following:</p>
-
-<figure class='code'><figcaption><span>Rakefile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;xcoder&#39;</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">task</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="ss">:specs</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">task</span> <span class="ss">:specs</span> <span class="k">do</span>
-</span><span class='line'>  <span class="no">Xcode</span><span class="o">.</span><span class="n">project</span><span class="p">(</span><span class="s1">&#39;TestProject&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">target</span><span class="p">(</span><span class="s1">&#39;Specs&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">config</span><span class="p">(</span><span class="s1">&#39;Debug&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">builder</span><span class="o">.</span><span class="n">build</span>
-</span><span class='line'><span class="k">end</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Gorgeous! And more importantly exceedingly more portable when I want to get
-started on the right foot. To make this ever more portable I recently added
-default rake tasks to the <a href="https://github.com/rayh/xcoder">xcoder</a> gem that adds
-all your Xcode projects in your default directory available through rake.</p>
-
-<figure class='code'><figcaption><span>Rakefile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;xcoder/rake_task&#39;</span>
-</span><span class='line'><span class="no">Xcode</span><span class="o">::</span><span class="no">RakeTask</span><span class="o">.</span><span class="n">new</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Which will generate several common tasks for each of your projects > targets >
-configurations</p>
-
-<figure class='code'><figcaption><span>rake output</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-</pre></td><td class='code'><pre><code class='bash'><span class='line'>rake xcode:test_project:specs:debug:build                   <span class="c"># Build TestProject Specs Debug</span>
-</span><span class='line'>rake xcode:test_project:specs:debug:clean                   <span class="c"># Clean TestProject Specs Debug</span>
-</span><span class='line'>rake xcode:test_project:specs:debug:package                 <span class="c"># Package TestProject Specs Debug</span>
-</span><span class='line'>rake xcode:test_project:specs:debug:test                    <span class="c"># Test TestProject Specs Debug</span>
-</span><span class='line'>rake xcode:test_project:specs:release:build                 <span class="c"># Build TestProject Specs Release</span>
-</span><span class='line'>rake xcode:test_project:specs:release:clean                 <span class="c"># Clean TestProject Specs Release</span>
-</span><span class='line'>rake xcode:test_project:specs:release:package               <span class="c"># Package TestProject Specs Release</span>
-</span><span class='line'>rake xcode:test_project:specs:release:test                  <span class="c"># Test TestProject Specs Release</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now the <code>Rakefile</code> looks something like:</p>
-
-<figure class='code'><figcaption><span>Rakefile</span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s1">&#39;xcoder/rake_task&#39;</span>
-</span><span class='line'><span class="no">Xcode</span><span class="o">::</span><span class="no">RakeTask</span><span class="o">.</span><span class="n">new</span>
-</span><span class='line'>
-</span><span class='line'><span class="n">task</span> <span class="ss">:default</span> <span class="o">=&gt;</span> <span class="s2">&quot;xcode:text_project:specs:debug:build&quot;</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>The benefit is that <a href="(https://github.com/rayh/xcoder">Xcoder</a> is leveraging the
-project file to generate the correct <code>xcodebuild</code> operation allowing your build
-to remain in lock-step with the Xcode environment as you build and test your
-product in a headless environment.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
+    
+      <a class="prev" href="/blog/page/2/">&larr; Older</a>
     
     <a href="/blog/archives">Blog Archives</a>
     
@@ -891,6 +818,10 @@ product in a headless environment.</p>
     <section>
   <h1>Recent Posts</h1>
   <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2012/09/29/dipping-a-toe-into-tmux/">Dipping a toe into TMUX</a>
+      </li>
     
       <li class="post">
         <a href="/blog/2012/09/11/pull-requests-from-terminal/">Pull Requests from Terminal</a>
@@ -906,10 +837,6 @@ product in a headless environment.</p>
     
       <li class="post">
         <a href="/blog/2012/05/30/clapping-for-apple/">Clapping For Apple</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/05/30/xcodes-project-file-makes-it-hard/">Xcode&#8217;s Project File Makes It Hard</a>
       </li>
     
   </ul>

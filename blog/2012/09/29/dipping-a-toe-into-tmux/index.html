@@ -5,11 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Category: testing, - Franklin Webber</title>
+  <title>Dipping a toe into TMUX - Franklin Webber</title>
   <meta name="author" content="Franklin Webber">
 
   
-  <meta name="description" content="Category: testing,">
+  <meta name="description" content="I started to scroll through tmux: productive mouse-free development. I thought I would give it a try to help me better manage remote systems by using &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +18,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="https://burtlo.github.comblog/categories/testing-">
+  <link rel="canonical" href="https://burtlo.github.com/blog/2012/09/29/dipping-a-toe-into-tmux">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -63,49 +63,117 @@
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Category: Testing,</h1>
+    
+      <h1 class="entry-title">Dipping a Toe Into TMUX</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-29T21:45:00-04:00" pubdate data-updated="true">Sep 29<span>th</span>, 2012</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives" class="category">
 
 
+<div class="entry-content"><p>I started to scroll through <a href="http://pragprog.com/book/bhtmux/tmux">tmux: productive mouse-free development</a>. I thought I would give it a try to help me better manage remote systems by using it locally. And for the most part it has been a pretty awesome tool that yields some results pretty quickly for my investment. So far the only tedious part is the lack of ability to easily scroll back through the history. I can do it, but it is by far not as easy it was simply using Terminal.</p>
 
-  
-  <h2>2012</h2>
+<p>Of course, after starting to read the book and starting working with the first few commands I started to hate using <strong>Ctrl+B</strong> as the prefix key. I immediately stopped reading and started to search for an easier way. What follows is how I mapped my <strong>CAPS LOCK</strong> key as <strong>Ctrl+B</strong>.</p>
 
-<article>
-  
-<h1><a href="/blog/2012/05/30/tdd-is-not-for-new-developers/">TDD Is Not For New Developers</a></h1>
-<time datetime="2012-05-30T20:04:00-04:00" pubdate><span class='month'>May</span> <span class='day'>30</span> <span class='year'>2012</span></time>
+<h3>Disabling CAPS LOCK</h3>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/teaching/'>teaching</a>, <a class='category' href='/blog/categories/testing-/'>testing,</a></span>
-</footer>
+<p>If you haven&#8217;t already done so, gain an extra key and open up your <em>System Preferences > Keyboard > Modifier Keys &#8230;</em> and rebind CAPSLOCK to <strong>No Action</strong>.</p>
 
+<h3>Rebinding CAPSLOCK to CONTROL_R (Right Control Key)</h3>
 
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/05/30/getting-more-out-of-our-documentation-by-putting-more-in-it/">Getting More Out Of Our Documentation (By Putting More In It)</a></h1>
-<time datetime="2012-05-30T00:03:00-04:00" pubdate><span class='month'>May</span> <span class='day'>30</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/documentation/'>documentation</a>, <a class='category' href='/blog/categories/testing-/'>testing,</a></span>
-</footer>
+<ul>
+<li>Install <a href="http://pqrs.org/macosx/keyremap4macbook/pckeyboardhack.html.en">PCKeyboardHack</a></li>
+<li>Open <em>System Preferences > PCKeyboardHack</em></li>
+<li>Change &#8220;Caps Lock&#8221; to keycode <code>62</code>.</li>
+</ul>
 
 
-</article>
+<p><img src="https://img.skitch.com/20120926-m3r8ttqnwu4j5bny7dx81tgp9d.jpg" alt="Reassigning the Caps Lock" /></p>
 
+<h3>Rebinding CONTROL_R (Right Control Key) to CONTROL + B</h3>
+
+<ul>
+<li><p>Install <a href="http://pqrs.org/macosx/keyremap4macbook/index.html.en">KeyRemap4MacBook</a></p></li>
+<li><p>Open <em>System Preferences > KeyRemap4MackBook > Misc &amp; Uninstall</em></p></li>
+<li>Click &#8220;Open private.xml&#8221;</li>
+</ul>
+
+
+<p><img src="https://img.skitch.com/20120926-f31sf7jfsfhunggg7qh9fbrpud.jpg" alt="Opening private.xml" /></p>
+
+<ul>
+<li>Copy and Paste the private.xml provided with in this gist.</li>
+<li>Open <em>System Preferences > KeyRemap4MackBook > Change Key</em></li>
+<li>Click &#8220;ReloadXML&#8221;</li>
+<li>Toggle open &#8220;TMUX Key Remappings&#8221;</li>
+<li>Check &#8220;TMUX: Right Control to Control+B</li>
+</ul>
+
+
+<p><img src="https://img.skitch.com/20120926-mp93sudigdsjseuqtfwp7q68w9.jpg" alt="Enabling Keybinding" /></p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Posted by <span class="fn">Franklin Webber</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-09-29T21:45:00-04:00" pubdate data-updated="true">Sep 29<span>th</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="https://burtlo.github.com/blog/2012/09/29/dipping-a-toe-into-tmux/" data-via="franklinwebber" data-counturl="https://burtlo.github.com/blog/2012/09/29/dipping-a-toe-into-tmux/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/09/11/pull-requests-from-terminal/" title="Previous Post: Pull Requests from Terminal">&laquo; Pull Requests from Terminal</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
