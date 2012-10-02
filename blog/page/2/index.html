@@ -9,8 +9,9 @@
   <meta name="author" content="Franklin Webber">
 
   
-  <meta name="description" content="The current state of iOS command-line tools for iOS is abysmal especially if you
-are familiar and comfortable with a particular feedback loop for &hellip;">
+  <meta name="description" content="On a recent iOS project we wanted to integrate the
+Facebook iOS SDK. The
+integration went smoothy. We copied in the compiled library and the required &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -65,6 +66,142 @@ are familiar and comfortable with a particular feedback loop for &hellip;">
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2012/03/25/universal-frameworks-for-ios-made-easy/">Universal Frameworks for iOS Made Easy!</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-03-25T15:58:00-04:00" pubdate data-updated="true">Mar 25<span>th</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>On a recent iOS project we wanted to integrate the
+<a href="https://github.com/facebook/facebook-ios-sdk">Facebook iOS SDK</a>. The
+integration went smoothy. We copied in the compiled library and the required
+headers and were able to focus on the login, authentication flow.</p>
+
+<h2>Problem</h2>
+
+<p>However, we later ran into trouble with the library working on the device but
+not in the simulator. We would fix it for the tests and the simulator but find
+out we had broken it again for the device. This back and forth continued until we had found out about Universal Frameworks.</p>
+
+<h2>Narrative</h2>
+
+<p>We needed to compile the library in a format that would work on both on the
+iPhone and the simulator. Google lead us to this <a href="http://db-in.com/blog/2011/07/universal-framework-iphone-ios-2-0/">invaluable post</a>
+that outlined the arduous path of creating a universal framework. A journey
+indeed filled with peril as there are so many opportunities along the way to
+take a misstep and lose your way.</p>
+
+<p>To the author&#8217;s credit, he does a good job of outlining the necessary steps to
+succeed. It is the shear overwhelming number of Xcode&#8217;s <a href="https://developer.apple.com/library/mac/#documentation/DeveloperTools/Reference/XcodeBuildSettingRef/1-Build_Setting_Reference/build_setting_ref.html">build settings</a>
+that can get in the way with crossing the finish line.</p>
+
+<p>As the project continued we came again to a similar crossroads as we needed to
+include Twitter authentication. We chose to use the
+<a href="https://github.com/thekarladam/MPOAuth">MPOAuth</a>
+library but again found the need to generate a universal framework to save us
+from the same particular annoyance (and others) that arose when it came time to
+integrate the library. We followed through the same treacherous steps.</p>
+
+<p>Having to do this twice has taught me that I do not want to do it again. There
+is simply too many steps to get right. It was something that needed to be easier
+and involve a lot less mouse-driven-development.</p>
+
+<h2>Solution</h2>
+
+<p><a href="https://github.com/rayh/xcoder">Xcoder</a> had the majority of the functionality to get started. However, it did
+not have the ability to create some core components like: Aggregate Targets,
+Copy Headers Build Phases, Run Script Build Phases.  At least it did not until
+this <a href="https://github.com/rayh/xcoder/pull/24">weekend</a>.</p>
+
+<p>I have created a <a href="https://gist.github.com/2201621">gist</a> that will generate a
+universal framework with sources and header files. This should successfully
+boil the the multiple page <a href="http://db-in.com/blog/2011/07/universal-framework-iphone-ios-2-0/">instructions</a> into roughly 100 lines of ruby code.</p>
+
+<p>Perhaps the most valuable part is the ability to set the multitude of required
+build settings, previously requiring deft configuration hunter skills, simply
+with the following:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">target</span><span class="o">.</span><span class="n">create_configurations</span> <span class="ss">:release</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">always_search_user_paths</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">architectures</span> <span class="o">=</span> <span class="o">[</span> <span class="s2">&quot;$(ARCHS_STANDARD_32_BIT)&quot;</span><span class="p">,</span> <span class="s1">&#39;armv6&#39;</span> <span class="o">]</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">copy_phase_strip</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">dead_code_stripping</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">debug_information_format</span> <span class="o">=</span> <span class="s2">&quot;dwarf-with-dsym&quot;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">c_language_standard</span> <span class="o">=</span> <span class="s1">&#39;gnu99&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">enable_objc_exceptions</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">generate_debugging_symbols</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">precompile_prefix_headers</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">gcc_version</span> <span class="o">=</span> <span class="s1">&#39;com.apple.compilers.llvm.clang.1_0&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">warn_64_to_32_bit_conversion</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">warn_about_missing_prototypes</span> <span class="o">=</span> <span class="kp">true</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">install_path</span> <span class="o">=</span> <span class="s2">&quot;$(LOCAL_LIBRARY_DIR)/Bundles&quot;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">link_with_standard_libraries</span> <span class="o">=</span> <span class="kp">false</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">mach_o_type</span> <span class="o">=</span> <span class="s1">&#39;mh_object&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">macosx_deployment_target</span> <span class="o">=</span> <span class="s1">&#39;10.7&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">product_name</span> <span class="o">=</span> <span class="s1">&#39;$(TARGET_NAME)&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">sdkroot</span> <span class="o">=</span> <span class="s1">&#39;iphoneos&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">valid_architectures</span> <span class="o">=</span> <span class="s1">&#39;$(ARCHS_STANDARD_32_BIT)&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">wrapper_extension</span> <span class="o">=</span> <span class="s1">&#39;framework&#39;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">info_plist_location</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">prefix_header</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span>
+</span><span class='line'>  <span class="n">config</span><span class="o">.</span><span class="n">save!</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -231,6 +368,10 @@ product in a headless environment.</p>
   <ul id="recent_posts">
     
       <li class="post">
+        <a href="/blog/2012/10/02/every-10-years/">Every 10 Years</a>
+      </li>
+    
+      <li class="post">
         <a href="/blog/2012/09/29/dipping-a-toe-into-tmux/">Dipping a toe into TMUX</a>
       </li>
     
@@ -244,10 +385,6 @@ product in a headless environment.</p>
     
       <li class="post">
         <a href="/blog/2012/05/30/tdd-is-not-for-new-developers/">TDD Is Not For New Developers</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/05/30/clapping-for-apple/">Clapping For Apple</a>
       </li>
     
   </ul>

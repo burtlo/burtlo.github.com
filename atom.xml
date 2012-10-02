@@ -4,7 +4,7 @@
   <title><![CDATA[Franklin Webber]]></title>
   <link href="https://burtlo.github.com/atom.xml" rel="self"/>
   <link href="https://burtlo.github.com/"/>
-  <updated>2012-09-29T22:02:32-04:00</updated>
+  <updated>2012-10-02T08:59:28-04:00</updated>
   <id>https://burtlo.github.com/</id>
   <author>
     <name><![CDATA[Franklin Webber]]></name>
@@ -12,6 +12,17 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Every 10 Years]]></title>
+    <link href="https://burtlo.github.com/blog/2012/10/02/every-10-years/"/>
+    <updated>2012-10-02T08:51:00-04:00</updated>
+    <id>https://burtlo.github.com/blog/2012/10/02/every-10-years</id>
+    <content type="html"><![CDATA[<p>I have this general belief that if I haven&#8217;t done something in the last 10 years then I can&#8217;t claim at having done it before. The reasoning behind such a ruling is based on the idea that within 10 years time you as a person have become someone else entirely: physically; emotionally; and mentally.</p>
+
+<p>This rule does not seek to discredit previous accomplishments but instead free myself from previous incarnations. To allow me to again be a beginner.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Dipping a toe into TMUX]]></title>
